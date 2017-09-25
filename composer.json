@@ -1,0 +1,7 @@
+{
+    "name": "php/mini-framework",
+    "description": "Project template for symfony-based mini framework.",
+    "type": "project",
+    "license": "GPL-2.0+",
+    "require": {}
+}
