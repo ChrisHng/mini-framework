@@ -29,7 +29,7 @@ services:
     environment:
       APACHE_LOG_LEVEL: debug
       APACHE_BACKEND_HOST: php
-      APACHE_SERVER_ROOT: /var/www/html/web
+      APACHE_SERVER_ROOT: /var/www/html
     volumes:
       - ./:/var/www/html
     labels:

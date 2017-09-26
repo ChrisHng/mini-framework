@@ -4,6 +4,7 @@
     "type": "project",
     "license": "GPL-2.0+",
     "require": {
-        "symfony/http-foundation": "^3.3"
+        "symfony/http-foundation": "^3.3",
+        "symfony/routing": "^3.3"
     }
 }
