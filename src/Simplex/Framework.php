@@ -10,16 +10,19 @@ use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver;
 use Symfony\Component\Routing;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class Framework {
   protected $matcher;
   protected $controllerResolver;
   protected $argumentResolver;
+  protected $dispatcher;
 
-  public function __construct(UrlMatcher $matcher, ControllerResolver $controllerResolver, ArgumentResolver $argumentResolver) {
+  public function __construct(UrlMatcher $matcher, ControllerResolver $controllerResolver, ArgumentResolver $argumentResolver, EventDispatcher $dispatcher) {
     $this->matcher = $matcher;
     $this->controllerResolver = $controllerResolver;
     $this->argumentResolver = $argumentResolver;
+    $this->dispatcher = $dispatcher;
   }
 
   public function handle(Request $request) {
@@ -39,6 +42,8 @@ class Framework {
     catch (Exception $e) {
       $response = new Response($e->getMessage(), 500);
     }
+
+    $this->dispatcher->dispatch('response', new ResponseEvent($request ,$response));
 
     return $response;
   }
