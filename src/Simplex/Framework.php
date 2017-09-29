@@ -8,11 +8,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Routing;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class Framework {
+class Framework implements HttpKernelInterface {
   protected $matcher;
   protected $controllerResolver;
   protected $argumentResolver;
@@ -25,7 +26,7 @@ class Framework {
     $this->dispatcher = $dispatcher;
   }
 
-  public function handle(Request $request) {
+  public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true) {
     $this->matcher->getContext()->fromRequest($request);
 
     try {
